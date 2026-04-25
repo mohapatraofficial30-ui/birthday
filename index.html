@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Devshree</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #ffe4ec, #ffd6e0);
+    overflow: hidden;
+}.container { text-align: center; padding-top: 50px; animation: fadeIn 2s ease; }
+
+h1 { color: #ff4d6d; font-size: 2.8rem; font-family: 'Pacifico', cursive; text-shadow: 0 0 10px rgba(255,105,135,0.3); }
+
+.slideshow { position: relative; width: 260px; height: 260px; margin: 30px auto; }
+
+.slideshow img { position: absolute; width: 100%; height: 100%; object-fit: cover; border-radius: 25px; opacity: 0; transition: opacity 1.5s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+
+.slideshow img.active { opacity: 1; }
+
+button { margin-top: 30px; padding: 12px 25px; border: none; background: #ff8fab; color: white; font-size: 16px; border-radius: 25px; cursor: pointer; box-shadow: 0 5px 15px rgba(255,105,135,0.3); }
+
+button:hover { background: #ff4d6d; }
+
+.flower { position: absolute; top: -50px; font-size: 24px; animation: fall linear infinite; }
+
+@keyframes fall { to { transform: translateY(100vh); } }
+
+@keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+
+.page2 { display: none; text-align: center; padding: 80px 20px; animation: fadeIn 1.5s ease; }
+
+.message-box { background: #fff0f5; padding: 25px; border-radius: 20px; display: inline-block; max-width: 420px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+
+.fade-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffe4ec; z-index: 10; opacity: 1; transition: opacity 1.5s ease; } </style>
+
+</head><body><div class="fade-overlay" id="fade"></div><audio autoplay loop>
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mid" type="audio/midi">
+</audio><div class="container" id="page1">
+    <h1>Happy Birthday Devshree 💖</h1><div class="slideshow">
+    <img src="photo1.jpg" class="slide active">
+    <img src="photo2.jpg" class="slide">
+    <img src="photo3.jpg" class="slide">
+</div>
+
+<button onclick="nextPage()">Click for Surprise ✨</button>
+
+</div><div class="page2" id="page2">
+    <h1>For You 💌</h1>
+    <div class="message-box">
+        <p id="messageText"></p>
+    </div>
+</div><script>
+// fade intro
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById('fade').style.opacity = '0';
+    }, 300);
+};
+
+// flower + hearts
+function createFlower() {
+    const flower = document.createElement('div');
+    flower.classList.add('flower');
+    flower.innerText = Math.random() > 0.5 ? '🌸' : '💖';
+    flower.style.left = Math.random() * window.innerWidth + 'px';
+    flower.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(flower);
+
+    setTimeout(() => flower.remove(), 5000);
+}
+setInterval(createFlower, 150);
+
+// slideshow
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+}, 2500);
+
+// page switch
+function nextPage() {
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    typeMessage();
+}
+
+// message
+const message = `Happiest Birthdayyy Mankedi...🎂🎉I know ame always gote bhala note re nathilu..I broke your trust many time but I didn't know you will stay...Actually it was unexpected cuz jaha v heichi i never thought of anyone by my side but you chose our friendship over anything..I am so grateful that you are in my life and I want you to know how much you matter in one's life...You are my family and You will always find me as your alibi in every life..Starting re i never thought we will be friends cuz tu mu already bahut different but the things that make us stay together is that you are my manduuuuuuu😚🤌🏻Dekh purba janma re tu hi mandu thilu mora sethipain hi chadiparunu mate tu😁
+
+Anyways...Just a small gift from an upcoming tech..Mu mo style re wish kali..I hope tate bhal lagiba..😁🤌🏻
+And sabubele mane rakhe ki tu matter karu kaha pain nuha ta mo pain sabubeleeee and Thank you so much just for existing in my life..I may not know what you like but I will never hurt you ever again🙃
+You deserve every love you can get💌
+
+Again Many many Happy returns of the day Manduuuuu🙈💗`;
+
+let i = 0;
+function typeMessage() {
+    if (i < message.length) {
+        document.getElementById('messageText').innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeMessage, 35);
+    }
+}
+</script></body>
+</html>
